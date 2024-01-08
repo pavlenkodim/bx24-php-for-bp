@@ -1,0 +1,54 @@
+Текстовое описание: Сообщить {{Ответственный (текст)}} об оплате {=Variable:summa1} от "{{Компания > printable}}" для "{{Компания-продавец (текст)}}"
+		    Адрес доставки документов - {=Variable:adres_dostavki > printable}. Доверенность - {=Variable:Doveren_v > printable}
+
+Вам поступила новая [url=https://trilinegroup.bitrix24.kz/company/personal/user/{=GlobalConst:Director1 > int}/tasks/task/view/{=A14363_11761_87521_1324:TaskId}/]задача финансового планирования[/url]
+
+Текст статуса: Ожидание сообщения об оплате транша №1: {=Variable:summa1} (исполнитель: {=GlobalConst:Buh1 > friendly}).
+
+Сумма итого: ={=Variable:summa1}+{=Variable:summa2}+{=Variable:summa3}+{=Variable:summa4}
+
+Название: {{Кем создан (имя) > friendly}} инициализировал оплату счета на сумму {{Сумма указанная в счете}} {{Валюта счета}}
+
+Название "Фирма выставляющая счет на оплату": {=Document:PROPERTY_FIRMA_VYSTAVLYAYUSHCHAYA_SCHET_NA_OPLATU_PRINTABLE}
+
+Ссылка "Бизнес-процесс в ленте": [url=https://trilinegroup.bitrix24.kz/bizproc/processes/{{ID информационного блока}}/element/0/{{ID элемента}}/?list_section_id=]{{Название}}[/url]
+
+Ссылка Задание: [url=https://trilinegroup.bitrix24.kz/company/personal/bizproc/{=Workflow:ID}/]Ссылка для просмотра задания[/url]
+
+Ссылка Задача: [url=https://trilinegroup.bitrix24.kz/company/personal/user/{=GlobalConst:Director1 > int}/tasks/task/view/{=A14363_11761_87521_1324:TaskId}/]задача финансового планирования[/url]
+
+Ссылка Сделка: [url=https://trilinegroup.bitrix24.kz/crm/deal/details/{{ID}}/]{{Название}}[/url]
+
+Ссылка Компания (сущность "Сделки"):  [url=https://trilinegroup.bitrix24.kz/crm/company/show/{{Компания}}/]{{Компания: Название компании}}[/url]
+
+Количество дней в командировке: =datediff({{Дата начала}}, {{Дата окончания}}, '%d days')
+
+<a href="https://trilinegroup.bitrix24.kz/company/personal/user/890/tasks/task/view/77814/">Задача</a>
+
+Привязка к сущности/элементу CRM (сущность "Сделки"): {{Компания: ID элемента CRM}}
+
+Преобразование даты функцией date: {{=date('d.m.Y',{=GlobalVar:DateTime})}}
+
+Сумма платежей: {{=round({=Variable:SummaPlatezhey}-{{Сумма ссуды}}/{{Срок в месяцах > string}},0)}}
+
+ПоследняяДатаМесяца: {{=date('t.m.Y', {=System:NowLocal})}}
+
+Количество дней в командировке: =datediff({{Дата начала}}, {{Дата окончания}}, '%d days')
+
+
+Преобразование в формат "Дата 18 часов":
+1) Текущая дата: {{=dateadd({=System:Date},"18h")}}
+2) Дата изменения элемента: {{=dateadd({{Дата изменения элемента > date}},"18h")}}
+3) Поле "ДатаТест" (тип: Дата): {{=dateadd({{ДатаТест}},"18h")}}
+
+
+Крайний срок задачи:
+1) Добавляя рабочие дни (часы): {{=workdateadd({=GlobalVar:DateTime},"+1d")}}
+2) Добавляя календарные дни (часы): {{=dateadd({=GlobalVar:DateTime},"+1d")}}
+3) На основании поля "ДатаТест" (тип: Дата): {{=dateadd({{ДатаТест}},"18h")}}
+4) На основании поля "ДатаВремяТест" (тип: Дата/Время): {{=dateadd({{ДатаВремяТест > date}},"18h")}}
+
+WebHook: http://trilinegroup.bitrix24.kz/rest/890/xxxxxxxxxxxxxxxxxx/task.checklistitem.add?TASKID=113694&fields[TITLE]=TextData02
+
+***************
+Привязка к сущности/элементу CRM (https://trilinegroup.bitrix24.kz/marketplace/app/54/): CO_{=A83810_2897_63973_24219:UF_CRM_1588270196} , D_{=A2710_49431_39093_93684:UF_CRM_1588263402}
